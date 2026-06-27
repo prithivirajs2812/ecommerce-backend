@@ -22,6 +22,14 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        try {
+            seedData();
+        } catch (Exception e) {
+            System.err.println("❌ DataSeeder: Failed to seed data due to database connection error: " + e.getMessage());
+        }
+    }
+
+    private void seedData() {
         if (productRepository.count() == 0) {
             List<Product> products = List.of(
                     Product.builder().name("Premium Wireless Headphones")
