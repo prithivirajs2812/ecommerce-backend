@@ -28,8 +28,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // Public — auth endpoints
+                        // Public — auth and health endpoints
                         .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/health").permitAll()
 
                         // Public — anyone can browse products/categories
                         .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
